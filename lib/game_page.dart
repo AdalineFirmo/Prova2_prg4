@@ -41,11 +41,12 @@ class _GamePageState extends State<GamePage> {
               );
   }  
 
-  void handleLetterPressed(){
+  void handleLetterPressed(String letter){
+      bool wasHit = widget.word.toUpperCase().contains(letter); 
       ScaffoldMessenger.of(context).showSnackBar(
          SnackBar(
           content: Text(
-            widget.word,
+            wasHit? 'Acertou!': 'Errou... :(',
             textAlign: TextAlign.center,
           ),
           backgroundColor: Colors.grey,
