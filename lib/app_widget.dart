@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hangman_game/game_page.dart';
 
 import 'home_page.dart';
 
@@ -13,11 +12,7 @@ class AppWidget extends StatelessWidget {
         primarySwatch: Colors.lightBlue,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      routes: {
-        '/': (context) =>  HangmanGame(),
-        '/play':(context) =>  GamePage(),
-      }, 
+      home: HangmanGame(),
     );
   }
 }

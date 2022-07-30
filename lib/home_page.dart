@@ -38,8 +38,7 @@ class _HangmanGameState extends State<HangmanGame> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 14  ,
-                    color: Color.fromARGB(255, 179, 243, 248),
-                  ),
+                    color: Color.fromARGB(255, 74, 125, 129)                  ),
                 ),
               ],
             ),

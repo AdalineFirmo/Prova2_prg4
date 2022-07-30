@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hangman_game/game_page.dart';
 
 class FormHome extends StatefulWidget {
   const FormHome({Key? key}) : super(key: key);
@@ -14,12 +15,12 @@ class _FormHomeState extends State<FormHome> {
   }
 
   String dica = '';
-  int tamanhoChave = 0;
+  String word = '';
 
   TextEditingController chave  = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-  
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -36,18 +37,20 @@ class _FormHomeState extends State<FormHome> {
               const SizedBox(height: 50),
 
               TextFormField(
-                onChanged: (value){
-                  tamanhoChave = tamChave(value);
-                },
+                controller: chave,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Palavra Chave',
                   ),
+
                 validator: (value) {
-                  return (  value!= null  && 
-                          !(value.contains(' ')) && 
-                                (value.isNotEmpty))
-                                ? null : 'Insera uma palavra';
+                  if ( value== null  || (value.contains(' '))){
+                    return ('Insira somente uma palavra');
+                  }
+                  if ( value.isEmpty){
+                    return ('Insira uma palavra');
+                  }
+                    return  null;
                   // tambem fazer codigo para evitar caracteres 
                   // tirar espaço no final
                 },   
@@ -56,6 +59,7 @@ class _FormHomeState extends State<FormHome> {
               const SizedBox(height: 10),
 
               TextField(
+                //controller: ,
                 keyboardType: TextInputType.text,
                 onChanged: (value){
                   dica = value; 
@@ -70,9 +74,13 @@ class _FormHomeState extends State<FormHome> {
 
               ElevatedButton(
                 onPressed: (){
+                  
+                  word = chave.text;
+
                   if(_formKey.currentState!.validate()){
-                    //Espaco();
-                    Navigator.of(context).pushReplacementNamed('/play');
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => GamePage(word)),
+                    );
                   }
                 }, 
                 child: const Text(

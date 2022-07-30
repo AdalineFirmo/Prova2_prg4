@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
 
 class Teclas extends StatefulWidget {
-  const Teclas({Key? key}) : super(key: key);
+  const Teclas({Key? key, this.handleLetterPressed}) : super(key: key);
+
+  final void Function()? handleLetterPressed;
 
   @override
-  State<Teclas> createState() => _TeclasState();
+  State<Teclas> createState() => _TeclasState(handleLetterPressed: handleLetterPressed);
 }
 
 class _TeclasState extends State<Teclas> {
 
+  final void Function()? handleLetterPressed;
+  _TeclasState({this.handleLetterPressed});
+
+
   Widget _card(){
     
     List<String> alf = const ['A', 'B', 'C', 'D', 'E', 'F', 'G',
-                                  'H', 'I', 'J', 'K', 'L', 'M', 'N', 
-                                  'O', 'P', 'Q', 'R', 'S', 'T', 'U',
-                                           'V', 'W', 'X',' ',  'Y', 'Z', ' ' ];
+                              'H', 'I', 'J', 'K', 'L', 'M', 'N', 
+                              'O', 'P', 'Q', 'R', 'S', 'T', 'U',
+                                'V', 'W', 'X',' ',  'Y', 'Z', ' ' ];
     if( cont >= 28){cont = 0;}
+
+    
 
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: handleLetterPressed,
         child: Text(
           alf[cont++], 
           textAlign: TextAlign.center,
